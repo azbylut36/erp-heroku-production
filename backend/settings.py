@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # DEBUG = True
 DEBUG = os.environ.get('DEBUG_VALUE')
 
-ALLOWED_HOSTS = ['theerponeteam.herokuapp.com']
+ALLOWED_HOSTS = ['theerponeteam.herokuapp.com', 'theerponeteamproduction.herokuapp.com']
 
 
 # Application definition
