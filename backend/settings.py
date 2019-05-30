@@ -196,6 +196,10 @@ AWS_DEFAULT_ACL = None
 # from django-storages documentation, which allows uploading of media files to AWS S3
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+# from django-storages documentation, which allows django-admin.py collectstatic to
+# automatically put static files in your bucket
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 # will automatically set some configurations for heroku use
 django_heroku.settings(locals())
 
