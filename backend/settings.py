@@ -142,19 +142,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
-STATIC_URL = '/static/'
-
-# Using os.path.join makes sure that the full path is created correctly
-# Base dir tells os where to store media files, in this case sig pics
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
-
-MEDIA_URL = '/media/' # Our pics will go in this directory 
-
-
 # Cors whitelist to prevent cors security. Currently just allowing all
 # CORS_ORIGIN_WHITELIST = (
 #      'localhost:3000/'
@@ -170,6 +157,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'login_success'
 LOGIN_URL = 'login'
 
+# NOTE: using os.path.join makes sure that the full path is created correctly
+# Base dir tells os where to store media files, in this case sig pics
+
 # Using gmail smtp to send out our emails
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -180,12 +170,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
-# keys to AWS S3 storage bucket which are stored in environment variables, so
-# make sure the variables are defined in macOS .bash_profile with actual values
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-
 # this prevents users from overwriting existing files in the 
 # storage bucket with the same name
 AWS_S3_FILE_OVERWRITE = False
@@ -193,12 +177,38 @@ AWS_S3_FILE_OVERWRITE = False
 # requirement from django-storages documentation
 AWS_DEFAULT_ACL = None
 
-# from django-storages documentation, which allows uploading of media files to AWS S3
+# from django-storages documentation, which sets S3 as place to store files
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-# from django-storages documentation, which allows django-admin.py collectstatic to
-# automatically put static files in your bucket
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# keys to AWS S3 storage bucket which are stored in environment variables, so
+# make sure the variables are defined in macOS .bash_profile with actual values
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
+# This will make sure that the file URL does not have unnecessary parameters like your access key
+AWS_QUERYSTRING_AUTH = False
+
+AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
+#STATIC_URL = '/static/'
+STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+#MEDIA_URL = '/media/' # Our pics will go in this directory 
+MEDIA_URL = STATIC_URL + 'media/'
+STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'), ) #new
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = 'staticfiles'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/' #new
+
+# new 
+STATICFILES_FINDERS = (
+'django.contrib.staticfiles.finders.FileSystemFinder',
+'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
 
 # will automatically set some configurations for heroku use
 django_heroku.settings(locals())
