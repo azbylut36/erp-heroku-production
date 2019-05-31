@@ -179,7 +179,7 @@ AWS_DEFAULT_ACL = None
 
 # from django-storages documentation, which sets S3 as place to store files
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'  # from the article
 
 # keys to AWS S3 storage bucket which are stored in environment variables, so
 # make sure the variables are defined in macOS .bash_profile with actual values
@@ -194,21 +194,21 @@ AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-#STATIC_URL = '/static/'
-STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+STATIC_URL = '/static/'
+#STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/' # from the article
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
-#MEDIA_URL = '/media/' # Our pics will go in this directory 
-MEDIA_URL = STATIC_URL + 'media/'
+MEDIA_URL = '/media/' # Our pics will go in this directory 
+#MEDIA_URL = STATIC_URL + 'media/'  # from the article
 STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'), ) #new
-#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_ROOT = 'staticfiles'
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/' #new
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#STATIC_ROOT = 'staticfiles'. #from the article
+#ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/' #new
 
 # new 
-STATICFILES_FINDERS = (
-'django.contrib.staticfiles.finders.FileSystemFinder',
-'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
+#STATICFILES_FINDERS = (
+#'django.contrib.staticfiles.finders.FileSystemFinder',
+#'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#)
 
 # will automatically set some configurations for heroku use
 django_heroku.settings(locals())
