@@ -78,8 +78,7 @@ def sendpdf(awardId):
     source = template.render(context)
     with tempfile.TemporaryDirectory() as tempdir:
         # copy the signature file from the media directory to the current temp directory
-        shutil.copy2(os.path.join('C:\\Users\Amy\Documents\CS467\ERP1\\backend\\',awarduser.image.url.lstrip('/')),
-                     tempdir)
+        shutil.copy2(awarduser.image.url,tempdir)
         # rename the file to signature.jpg because that is the filename the Latex template is looking for
         os.rename(os.path.join(tempdir, ntpath.basename(awarduser.image.url)), os.path.join(tempdir, 'signature.jpg'))
         filename = os.path.join(tempdir, 'texput.tex')
