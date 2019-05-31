@@ -179,7 +179,7 @@ AWS_DEFAULT_ACL = None
 
 # from django-storages documentation, which sets S3 as place to store files
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'  # from the article
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'  # from the article
 
 # keys to AWS S3 storage bucket which are stored in environment variables, so
 # make sure the variables are defined in macOS .bash_profile with actual values
@@ -188,9 +188,10 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 # This will make sure that the file URL does not have unnecessary parameters like your access key
-AWS_QUERYSTRING_AUTH = False
+# from the article
+# AWS_QUERYSTRING_AUTH = False
 
-AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com'
+#AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com'  # from the article
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
