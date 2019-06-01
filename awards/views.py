@@ -101,7 +101,7 @@ def sendpdf(awardId):
                     log = f.read()
                 raise ValueError('A very specific bad thing happened')
             os.rename(os.path.join(tempdir, 'texput.pdf'), os.path.join(tempdir, 'awardCert.pdf'))
-            certfile = tempdir + '\\awardCert.pdf'
+            certfile = tempdir + '/awardCert.pdf'
             email = EmailMessage(
                 subject='Congratulations',
                 body='Congratulations on getting recognized',
