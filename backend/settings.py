@@ -219,3 +219,10 @@ django_heroku.settings(locals())
 
 # latex interpreter
 LATEX_INTERPRETER = 'pdflatex'
+
+# settings for django-report-builder
+REPORT_BUILDER_INCLUDE = [
+    'account.account',
+    'awards.award',
+    'users_to_awards.accounttoaward'
+]
