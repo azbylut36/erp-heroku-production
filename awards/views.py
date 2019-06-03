@@ -4,6 +4,7 @@ from subprocess import PIPE, run
 import tempfile
 import shutil
 import ntpath
+import wget
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -77,11 +78,16 @@ def sendpdf(awardId):
     template = get_template(template_name, using='tex')
     source = template.render(context)
     with tempfile.TemporaryDirectory() as tempdir:
+
         # copy the signature file from the media directory to the current temp directory
-        shutil.copy2(os.path.join('C:\\Users\Amy\Documents\CS467\ERP1\\backend\\',awarduser.image.url.lstrip('/')),
-                     tempdir)
+        # shutil.copy2(awarduser.image.url,tempdir)
         # rename the file to signature.jpg because that is the filename the Latex template is looking for
-        os.rename(os.path.join(tempdir, ntpath.basename(awarduser.image.url)), os.path.join(tempdir, 'signature.jpg'))
+        # os.rename(os.path.join(tempdir, ntpath.basename(awarduser.image.url)), os.path.join(tempdir, 'signature.jpg'))
+
+        #download file from S3 location
+        url = awarduser.image.url
+        wget.download(url, tempdir + '/signature.jpg')
+
         filename = os.path.join(tempdir, 'texput.tex')
         with open(filename, 'x', encoding='utf-8') as f:
             f.write(source)
@@ -95,7 +101,7 @@ def sendpdf(awardId):
                     log = f.read()
                 raise ValueError('A very specific bad thing happened')
             os.rename(os.path.join(tempdir, 'texput.pdf'), os.path.join(tempdir, 'awardCert.pdf'))
-            certfile = tempdir + '\\awardCert.pdf'
+            certfile = tempdir + '/awardCert.pdf'
             email = EmailMessage(
                 subject='Congratulations',
                 body='Congratulations on getting recognized',
