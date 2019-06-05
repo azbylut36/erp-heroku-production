@@ -2,14 +2,20 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <h1>{{object.category}}</h1>
-<div id="line">
-    <div class = "lead">Recipient: </div>
-    {{object.recipient_fname}} {{object.recipient_lname}}
-</div>
-<div class = "lead">Recipient Email: </div>{{object.recipient_email}}<br/>
-<div class = "lead">Granted on: </div>{{object.date_granted}}<br/>
-<div class = "lead">Region: </div>{{object.region}}<br/>
-<div class = "lead">Submitted By: </div>{{object.submitter}}<br/>
+<div class = "lead d-inline">Recipient: </div>
+<div class = "d-inline">{{object.recipient_fname}} {{object.recipient_lname}}</div><br />
+
+<div class = "lead d-inline">Recipient Email: </div>
+<div class = "d-inline">{{object.recipient_email}}</div><br/>
+
+<div class = "lead d-inline">Granted on: </div>
+<div class = "d-inline">{{object.date_granted}}</div><br/>
+
+<div class = "lead d-inline">Region: </div>
+<div class = "d-inline">{{object.region}}</div><br/>
+
+<div class = "lead d-inline">Submitted By: </div>
+<div class = "d-inline">{{object.submitter}}</div><br/>
     <br/>
 <a class= "btn btn-outline-info" href="{% url 'award-update' object.id %}">Edit</a>
 {% endblock %}
