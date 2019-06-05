@@ -2,7 +2,10 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <h1>{{object.category}}</h1>
-<div class = "lead">Recipient: </div>{{object.recipient_fname}} {{object.recipient_lname}} <br/>
+<div id="line">
+    <div class = "lead">Recipient: </div>
+    {{object.recipient_fname}} {{object.recipient_lname}}
+</div>
 <div class = "lead">Recipient Email: </div>{{object.recipient_email}}<br/>
 <div class = "lead">Granted on: </div>{{object.date_granted}}<br/>
 <div class = "lead">Region: </div>{{object.region}}<br/>
