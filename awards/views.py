@@ -87,7 +87,7 @@ def sendpdf(awardId):
         #download file from S3 location
         url = awarduser.image.url
         wget.download(url, tempdir + '/signature.jpg')
-
+        # test
         filename = os.path.join(tempdir, 'texput.tex')
         with open(filename, 'x', encoding='utf-8') as f:
             f.write(source)
