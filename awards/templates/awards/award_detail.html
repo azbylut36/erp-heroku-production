@@ -2,10 +2,11 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <h1>{{object.category}}</h1>
-<h2>Recipient: </h2>{{object.recipient_fname}} {{object.recipient_lname}} <br/>
-<h2>Recipient Email: </h2>{{object.recipient_email}}<br/>
-<h2>Granted on: </h2>{{object.date_granted}}<br/>
-<h2>Region: </h2>{{object.region}}<br/>
-<h2>Submitted By: </h2>{{object.submitter}}<br/>
+<div class = "lead">Recipient: </div>{{object.recipient_fname}} {{object.recipient_lname}} <br/>
+<div class = "lead">Recipient Email: </div>{{object.recipient_email}}<br/>
+<div class = "lead">Granted on: </div>{{object.date_granted}}<br/>
+<div class = "lead">Region: </div>{{object.region}}<br/>
+<div class = "lead">Submitted By: </div>{{object.submitter}}<br/>
+    <br/>
 <a class= "btn btn-outline-info" href="{% url 'award-update' object.id %}">Edit</a>
 {% endblock %}
