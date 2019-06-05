@@ -32,6 +32,9 @@ urlpatterns = [
 
     # awards
     path('awards/', include('awards.urls'), name='awards-home'),
+
+    # admin bi reporting interface
+    url(r'^report_builder/', include('report_builder.urls'))
 ]
 
 # Only works in debug mode, may need to change for deployment

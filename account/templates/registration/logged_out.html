@@ -1,5 +1,6 @@
 {% extends "awards/base.html" %}
 {% block navbar %}
+    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
     <a class="nav-item nav-link" href="{% url 'login' %}">Log in</a>
 {% endblock %}
 {% block content %}
