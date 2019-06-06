@@ -3,11 +3,11 @@
 {% block navbar %}
     <a class="nav-item nav-link" href="{% url 'awards-home' %}">Awards</a>
     <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-    <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+    <a class="nav-item nav-link" href="{% url 'logout' %}">Log out</a>
 {% endblock %}
 {% block content %}
 <h1>My Awards</h1>
-    <a class="btn btn-outline-info" href="{% url 'award-create' %}">+ New Award</a>
+    <a class="btn btn-outline-info" href="{% url 'award-create' %}">+ New award</a>
     <!--<a class="btn btn-primary" href="{% url 'award-create' %}">Delete</a>-->
     <br/>
     <br/>
