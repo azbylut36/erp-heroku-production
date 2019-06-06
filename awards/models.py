@@ -17,7 +17,7 @@ class Award(models.Model):
                                 default=EMPLOYEE_OF_THE_YEAR)
     region = models.CharField('region', max_length=120, blank=False)
     date_created = models.DateTimeField('created', default=timezone.now, null=True)
-    date_granted = models.DateTimeField('date granted', blank=True)
+    date_granted = models.DateTimeField('date granted (YYYY-MM-DD hh:mm:ss)', blank=True)
     submitter = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
     recipient_fname = models.CharField('recipient first name', max_length=120, blank=False)
     recipient_lname = models.CharField('recipient last name', max_length=120, default=None)
