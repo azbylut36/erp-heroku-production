@@ -8,7 +8,7 @@ from crispy_forms.layout import ButtonHolder
 from .models import Award
 
 class AwardForm(forms.ModelForm):
-    #helper = FormHelper
+
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
@@ -24,3 +24,5 @@ class AwardForm(forms.ModelForm):
     class Meta:
         model = Award
         fields = ['recipient_fname', 'recipient_lname', 'recipient_email', 'region', 'date_granted', 'category']
+
+        recipient_email = forms.CharField(required=True, widget=forms.EmailInput(attrs={'class': 'validate', }))
