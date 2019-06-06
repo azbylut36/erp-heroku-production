@@ -1,9 +1,10 @@
 {% extends "awards/base.html" %}
 {% load crispy_forms_tags %}
-<!-- {% block navbar %}
+{% block navbar %}
     <a class="nav-item nav-link" href="{% url 'awards-home' %}">Awards</a>
+    <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
     <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-{% endblock %} -->
+{% endblock %}
 {% block content %}
     <div class="content-section">
         <form method="POST" enctype="multipart/form-data"> 
