@@ -10,7 +10,7 @@ from .models import Account, Profile
 
 class AccountAdmin(UserAdmin):
     model = Account
-    list_display = ['email', 'is_admin', 'first_name', 'last_name']
+    list_display = ['email', 'is_staff', 'first_name', 'last_name']
 
     # what admin sees when they attempt to add new user
     add_form = AccountRegisterForm

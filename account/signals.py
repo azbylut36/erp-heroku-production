@@ -1,6 +1,9 @@
+
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import post_save, pre_save
+from report_builder.models import Report
+
 from .models import Account
 from django.dispatch import receiver
 from .models import Profile
@@ -32,6 +35,10 @@ def set_admin_permissions(sender, instance, **kwargs):
 		delete_account = Permission.objects.get(content_type=account_content_type, codename='delete_account')
 		view_account = Permission.objects.get(content_type=account_content_type, codename='view_account')
 
+		report_content_type = ContentType.objects.get_for_model(Report)
+		add_report = Permission.objects.get(content_type=report_content_type, codename='add_report')
+		change_report = Permission.objects.get(content_type=report_content_type, codename='change_report')
+
 		profile_content_type = ContentType.objects.get_for_model(Profile)
 		delete_profile = Permission.objects.get(content_type=profile_content_type, codename='delete_profile')
 
@@ -40,14 +47,17 @@ def set_admin_permissions(sender, instance, **kwargs):
 			change_account,
 			delete_account,
 			view_account,
-			delete_profile
+			delete_profile,
+			add_report,
+			change_report
 		])
 
 
 @receiver(pre_save, sender=Account)
-def set_username_as_email(sender, instance, **kwargs):
+def auto_set_custom_attributes(sender, instance, **kwargs):
 	"""
 	This ensures that if we modify the email, it also updates the username to that email address (since we are treating
 	username and emails as the same, even though they are different fields in the DB)
 	"""
 	instance.username = instance.email
+	instance.is_admin = instance.is_staff
