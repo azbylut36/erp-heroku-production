@@ -38,7 +38,8 @@ class Account(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    #image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    image = models.ImageField(verbose_name='Signature Image', default='default.jpg', upload_to='profile_pics')
 
     def __str__(self):
         return f'{self.user.username} Profile'

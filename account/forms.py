@@ -58,6 +58,10 @@ class AccountChangeForm(UserChangeForm):
 class AccountUpdateForm(forms.ModelForm):
     email = forms.EmailField()
 
+    first_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'required': 'true'}),)
+    last_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'required': 'true'}),)
+
+
     class Meta:
         model = Account
         fields = ['first_name', 'last_name', 'email']

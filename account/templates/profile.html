@@ -16,6 +16,9 @@
                  <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
               </div>
               {{ p_form|crispy }}
+              <div>
+              <p class="text-secondary">{{ user.scheduled_at }}</p>
+              </div>
           </fieldset>
           <div class="form-group">
             <button class="btn btn-outline-info" type="submit">Update</button>
