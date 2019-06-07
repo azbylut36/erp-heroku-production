@@ -19,6 +19,8 @@ class AccountRegisterForm(UserCreationForm):
         # Overriding some settings and labels
         # this makes it so that we validate it's a proper email
         email = forms.CharField(required=True, widget=forms.EmailInput(attrs={'class': 'validate', }))
+        first_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'required': 'true'}),)
+        last_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'required': 'true'}),)
 
         # updates the labels that appears on the UI
         labels = {
