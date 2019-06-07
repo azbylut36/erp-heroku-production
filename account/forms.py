@@ -10,6 +10,9 @@ class AccountRegisterForm(UserCreationForm):
     """
     Responsible for the form to register. User fills the form, we process the form, and put it in DB.
     """
+    first_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'required': 'true'}),)
+    last_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'required': 'true'}),)
+
     class Meta(UserCreationForm):
         model = Account
 
@@ -19,8 +22,7 @@ class AccountRegisterForm(UserCreationForm):
         # Overriding some settings and labels
         # this makes it so that we validate it's a proper email
         email = forms.CharField(required=True, widget=forms.EmailInput(attrs={'class': 'validate', }))
-        first_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'required': 'true'}),)
-        last_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'required': 'true'}),)
+   
 
         # updates the labels that appears on the UI
         labels = {
