@@ -6,6 +6,7 @@ from .views import (AwardCreateView,
                     AwardUpdateView)
 # from current directory import the views
 from . import views
+from .decorators import not_admin
 
 
 # create path for awards homepage. path() takes three arguments:
@@ -19,8 +20,8 @@ urlpatterns = [
     # path('pdf/<int:pk>/', views.generatepdf, name='award-generatepdf'),
     path('send/<int:pk>/', views.send, name='award-send'),
     path('delete/<int:pk>/', views.delete, name='award-delete'),
-    path('<int:pk>/', login_required(AwardDetailView.as_view()), name='award-detail'),
-    path('update/<int:pk>/', login_required(AwardUpdateView.as_view()), name='award-update'),
-    path('newAward/', login_required(AwardCreateView.as_view()), name='award-create')
+    path('<int:pk>/', login_required(not_admin(AwardDetailView.as_view())), name='award-detail'),
+    path('update/<int:pk>/', login_required(not_admin(AwardUpdateView.as_view())), name='award-update'),
+    path('newAward/', login_required(not_admin(AwardCreateView.as_view())), name='award-create')
 
 ]
