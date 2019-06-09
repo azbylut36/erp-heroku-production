@@ -28,12 +28,14 @@ DEFAULT_INTERPRETER = 'lualatex'
 from .models import Award
 from .tables import AwardTable
 from .forms import AwardForm
+from .decorators import not_admin
 
 
 logger = logging.getLogger(__name__)
 
 
 @login_required
+@not_admin
 def home(request):
     logger.info("test view")
     table = AwardTable(Award.objects.filter(submitter=request.user))
@@ -42,6 +44,7 @@ def home(request):
     return render(request, 'awards/home.html', {'table': table})
 
 @login_required
+@not_admin
 def send(request, *args, **kwargs):
     context = {}
     sendpdf(kwargs['pk'])
@@ -51,6 +54,7 @@ def send(request, *args, **kwargs):
 
 
 @login_required
+@not_admin
 def delete(request, *args, **kwargs):
     Award.objects.filter(pk=kwargs['pk']).delete()
     response = redirect('awards-home')
